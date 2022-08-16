@@ -5,9 +5,10 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Tasks from "./components/Tasks"
 import AddTask from "./components/AddTask"
-
+import {connect, useSelector} from "react-redux"
 
 function App() {
+  const amount= useSelector(state=>state.amount)
   const [count, setCount]= useState(0)
 
   const [showAddTask, setShowAddTask]= useState(false)
@@ -94,7 +95,7 @@ function App() {
 
     <Router>
     <div className="container">
-      <p>{count}</p>
+      <p>{count} {amount}</p>
       <button onClick={()=> setCount(count+1)}/>
       <Header onAddTask={()=> setShowAddTask(!showAddTask)} showAddTask={showAddTask}/>
       
@@ -116,4 +117,4 @@ function App() {
   )
 }
 
-export default App;
+export default connect(store=>store)(App);
