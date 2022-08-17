@@ -9,8 +9,7 @@ import {connect, useSelector} from "react-redux"
 import { useDispatch } from "react-redux"
 
 function App() {
-  const amount= useSelector(state=>state.amount)
-  const [count, setCount]= useState(0)
+
   const dispatch= useDispatch();
   const tasksFromStore= useSelector((state)=>state.tasks);
 
@@ -65,29 +64,31 @@ function App() {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({
-        text: "qwqwqwqw at School",
-        day: "Feb 6th at 1:30pm",
-        reminder: true
-      })
+      body: JSON.stringify(task)
     })
     const data = await res.json()
-    setTasks([...tasks, data])
+    //setTasks([...tasks, data])
+    dispatch(addTaskAction(data))
+  }
 
+  //fetch add task action
+  const addTaskAction=(data)=>{
+    return {
+      type: "ADD_TASK",
+      data
+    }
   }
 
   return (
 
     <Router>
     <div className="container">
-      <p>{count} {amount}</p>
-      <button onClick={()=> setCount(count+1)}/>
       <Header onAddTask={()=> setShowAddTask(!showAddTask)} showAddTask={showAddTask}/>
       
       <Routes>
         <Route path='/' element={
           <>
-          {showAddTask && <AddTask onAddTask={addTask}/>} 
+          {showAddTask && <AddTask /*onAddTask={addTask}*/ />} 
           {tasksFromStore.length > 0 ?<Tasks  /*onDelete={deleteTask}*//> : 'no tasks to show'}
           </>
         }>

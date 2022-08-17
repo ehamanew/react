@@ -1,6 +1,10 @@
 import { useState } from "react"
 
 const AddTask = ({onAddTask}) =>{
+
+
+
+    
   //state
     const [text, setText] = useState('')
     const [day, setDay] = useState('')

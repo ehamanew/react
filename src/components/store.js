@@ -29,6 +29,12 @@ function reducer(state=initialState, action) {
             return t.id === action.id
            })
             return  {...state,tasks:indexOf};
+        case 'ADD_TASK':
+            let oldTasks=state.tasks;
+
+            oldTasks.push(action.data)
+            return {...state, tasks:oldTasks}
+
 
         default:
             return state;
