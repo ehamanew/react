@@ -1,12 +1,14 @@
-//dima param it9ra f m39oufa
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Task from "./Task"
-const Tasks = ({tasks, onDelete, toggleReminder}) =>{
-  
-
+const Tasks = () =>{
+    const tasksFromStore= useSelector((state)=>state.tasks);
+   
+   
     return (
         <>
-            {tasks.map((task)=>(
-            <Task key={task.id} task ={task} onDelete={onDelete} toggleReminder={toggleReminder}></Task>
+            {tasksFromStore.map((task)=>(
+            <Task key={task.id} task ={task} ></Task>
             ))}
         </>
     )
